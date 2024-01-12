@@ -1,0 +1,27 @@
+program lista_declaratii declaratie_compusa expresie_modulo declaratie declaratie_simpla declaratie_structura declaratie declaratie_primitiva declaratie_array tip_simplu declaratie_atribuire declaratie_daca declaratie_cat_timp declaratie_citire declaratie_scriere termen relatie conditie expresie_adaugare expresie_scadere expresie_inmultire expresie_impartire expresie_aritmetica
+start ; { } + - * / ) ( citeste scrie IDENTIFICATOR CONST add sub mul mod div array [ ] = daca altfel cat_timp int string char < <= == != => > ,
+program
+program->start declaratie_compusa
+lista_declaratii->declaratie|lista_declaratii declaratie
+declaratie_compusa->{ lista_declaratii }
+declaratie->declaratie_simpla ;|declaratie_structura
+declaratie_simpla->declaratie|declaratie_atribuire|declaratie_citire|declaratie_scriere
+declaratie_structura->declaratie_compusa|declaratie_daca|declaratie_cat_timp
+declaratie->declaratie_primitiva|declaratie_array
+declaratie_primitiva->tip_simplu IDENTIFICATOR
+declaratie_array->array tip_simplu IDENTIFICATOR [ ]
+tip_simplu->int|string|char
+declaratie_atribuire->IDENTIFICATOR = expresie_aritmetica
+declaratie_daca->daca ( conditie ) { declaratie } altfel { declaratie }
+declaratie_cat_timp->cat_timp ( conditie ) declaratie_compusa
+declaratie_citire->citeste ( IDENTIFICATOR )
+declaratie_scriere->scrie ( IDENTIFICATOR )|scrie ( CONST )
+termen->IDENTIFICATOR|CONST
+relatie-><|<=|==|!=|=>|>
+conditie->expresie_aritmetica relatie expresie_aritmetica
+expresie_adaugare->add ( expresie_aritmetica , expresie_aritmetica )
+expresie_scadere->sub ( expresie_aritmetica , expresie_aritmetica )
+expresie_inmultire->mul ( expresie_aritmetica , expresie_aritmetica )
+expresie_impartire->div ( expresie_aritmetica , expresie_aritmetica )
+expresie_modulo->mod ( expresie_aritmetica , expresie_aritmetica )
+expresie_aritmetica->expresie_adaugare|expresie_scadere|expresie_inmultire|expresie_impartire|expresie_modulo|termen
